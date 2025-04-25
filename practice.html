@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Tunnel Runner</title>
+    <style>
+        body { margin: 0; overflow: hidden; font-family: Arial, sans-serif; text-align: center; }
+        canvas { display: block; }
+        .score {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="score">Score: <span id="score">0</span></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer;
+        let playerSphere, obstacles = [];
+        let score = 0, gameOver = false;
+
+        function init() {
+            // Scene setup
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x111111);
+
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.set(0, 1, 5);
+
+            // Renderer setup
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Lighting
+            let light = new THREE.PointLight(0xffffff, 1, 100);
+            light.position.set(0, 5, 5);
+            scene.add(light);
+
+            // Create Player Sphere
+            let sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+            let sphereMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+            playerSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+            playerSphere.position.set(0, 0, 0);
+            scene.add(playerSphere);
+
+            // Start Generating Obstacles
+            generateObstacles();
+            animate();
+        }
+
+        // Move Player Left/Right
+        document.addEventListener("keydown", function(event) {
+            if (gameOver) return;
+            if (event.key === "ArrowLeft" && playerSphere.position.x > -2) {
+                playerSphere.position.x -= 0.5;
+            }
+            if (event.key === "ArrowRight" && playerSphere.position.x < 2) {
+                playerSphere.position.x += 0.5;
+            }
+        });
+
+        // Generate Obstacles
+        function generateObstacles() {
+            if (gameOver) return;
+
+            let obstacleGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+            let obstacleMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+            let obstacle = new THREE.Mesh(obstacleGeometry, obstacleMaterial);
+
+            let randomX = [-2, -1, 0, 1, 2][Math.floor(Math.random() * 5)];
+            obstacle.position.set(randomX, 0, -10);
+
+            scene.add(obstacle);
+            obstacles.push(obstacle);
+
+            setTimeout(generateObstacles, 1000);
+        }
+
+        // Game Loop
+        function animate() {
+            if (gameOver) return;
+
+            requestAnimationFrame(animate);
+
+            obstacles.forEach((obstacle, index) => {
+                obstacle.position.z += 0.2 + score * 0.001;
+
+                // Collision Detection
+                if (obstacle.position.z > 0.5 && Math.abs(obstacle.position.x - playerSphere.position.x) < 0.5) {
+                    gameOver = true;
+                    alert("Game Over! Your Score: " + score);
+                    location.reload();
+                }
+
+                // Remove old obstacles
+                if (obstacle.position.z > 5) {
+                    scene.remove(obstacle);
+                    obstacles.splice(index, 1);
+                    score++;
+                    document.getElementById("score").innerText = score;
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        // Initialize Game
+        init();
+    </script>
+</body>
+</html>

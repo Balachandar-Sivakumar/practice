@@ -709,6 +709,24 @@
 // }
 // console.log(obj)
 
+// let a = 'dvdf',str='',tempstr='';
+
+// for(let i=0;i<a.length;i++){
+//     let tempstr=''
+//     for(let j=i;j<a.length;j++){
+//          if(tempstr.includes(a[j])){
+//              break;
+//          }
+//          tempstr+=a[j]
+//          if(tempstr.length>str.length){
+//              str=tempstr
+//          }
+//     }
+    
+//  }
+
+
+
 
 
 

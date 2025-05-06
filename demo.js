@@ -727,11 +727,205 @@
 
 
 
+// let inp = "()";
+
+// let a =[...inp];
+
+// for(let i=0;i<a.length;i++){
+//     for(let j=0;j<a.length;j++){
+//         if(a[i]=='(' && a[j]==')' || a[i]=='{' && a[j]=='}' || a[i]=='[' && a[j]==']' ){
+//             a.splice(j,1);j--;
+//             a.splice(i,1);i--;
+//         }
+//     }
+// }
+// if(!a.length){
+//     console.log(true);
+// }
+// else{
+//     console.log(false); 
+// }
+
+// let a = [[21,2],[1,2],[12,5],[7,2],[35,3],[32,2],[80,2],[91,5],[92,3],[27,3],[19,1],[37,3],[85,2],[33,4],[25,1],[91,4],[44,3],[93,3],[65,4],[82,3],[85,5],[81,3],[29,2],[25,1],[74,2],[58,1],[85,1],[84,2],[27,2],[47,5],[48,4],[3,2],[44,3],[60,5],[19,2],[9,4],[29,5],[15,3],[1,3],[60,2],[63,3],[79,3],[19,1],[7,1],[35,1],[55,4],[1,4],[41,1],[58,5]],count=0;
+// let check=0;
 
 
+// for (let i = 0; i < a.length; i++) {
+//     let temp = 0;
+//     for (let j = i; j < a.length; j++) {
+        
+//         temp += a[j][0];
+      
+//        let sum=0;
+//         for(let k=j+a[j][1]+1;k<a.length;k++){
+//             if(a[k][0]>sum){
+//                 sum+=a[k][0];
+//                 k=a[k][1]+k+1
+//             }
+//         }
+//         temp+=sum;
+//        break;
+//     }
+//     count = Math.max(count, temp);
+//     console.log(count)
+// }
+
+// console.log(count)
+
+// let a = 'lokesh';a=a.split('')
+// let b = 'vignesh';b=b.split('')
+
+// for(let i=0;i<a.length;i++){
+//     for(let j=0;j<b.length;j++){
+//         if(a[i]==b[j]){
+//             a.splice(i,1);
+//             b.splice(j,1);
+//             j--;i--;
+//         }
+//     }
+// }
+
+//  a = [...a,...b];
+
+// let arr = ['f','l','a','m','e','s'],loop=a.length;
+
+// for(let i=0;i<a.length;i++){
+//    if(arr.length==1)break;
+//    if(arr.length==i){i=0};
+//    if(loop==1){
+//     arr.splice(i,1);
+//     i--;
+//     loop=a.length
+//    }else{
+//    loop--;
+// }
+// }
+// console.log(arr)
+
+// 1, Flated the nested Array
+
+// let arr=[2,[4,[4]]]
+
+// let result = [];
+
+//   function merge(input) {
+//     for (let i = 0; i < input.length; i++) {
+//       if (Array.isArray(input[i])) {
+//         merge(input[i]); 
+//       } else {
+//         result[result.length] = input[i]; 
+//       }
+//     }
+//   }
+
+//   merge(arr);
+
+//   console.log(result)
+ 
+// 2,Capitalize the first word
+
+// let a = "hello world how are you",b='';
+//     a=[...a];
+
+// for(let i=0;i<a.length;i++){
+//     a[0]=a[0].toUpperCase()
+//     if(a[i]==' '){
+//         a[i+1]=a[i+1].toUpperCase()
+//     }
+//     b+=a[i];
+// }
+// console.log(b)
+
+// 3,Find the longest word in the sentance
+
+// let a = 'hello world welcome to javascript',temp='',large='';
 
 
+// for(let i=0;i<a.length;i++){
+//     if(a[i]==' '){
+//        if(temp.length>large.length){
+//         large=temp;
+//        }
+//        temp='';
+//     }else{
+//         temp+=a[i]
+//     }
+// }
+// if(temp.length>large.length){
+//     large=temp;
+// }
+
+// console.log(large)
+
+// 4,valid paranthisses
+
+// let a = '(())',count=0
+  
+//     for(let i=0;i<a.length;i++){
+//         for(let j=i+1;j<a.length;j++){
+//             if(a[i]=='(' && a[j]==')' ||a[i]=='{' && a[j]=='}' ||a[i]=='[' && a[j]==']'){
+//                 count+=2;
+//                 break;
+//             }
+//         }
+//     }
+//     if(count==a.length){
+//         console.log(true)
+//     }else(console.log(false))
+
+// 5,Anagram this one is wrong
+
+// let a = ['top','pot','listen','opt','silent'],result=[];
+
+// for(let i=0;i<a.length;i++){
+//     for(let j=i+1;j<a.length;j++){
+//         if(a[i].length==a[j].length){
+//             anagram(a[i],a[j])
+//         }
+//     }
+// }
 
 
+// function anagram(i_ind,j_ind){
+//     let count = 0;
+//     for(let i=0;i<i_ind.length;i++){
+//         for(j=0;j<j_ind.length;j++){
+//             if(i_ind[i]==j_ind[j]){
+//                 count++
+//             }
+//         }
+//     }
+//     if(count==i_ind.length){
+//         result[result.length]=[i_ind,j_ind]
+//     }
+// }
+// console.log(result)
+
+// 6, Junk array
+
+// let a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],count=3;
+// let junk = [],resutl=[];
+// for(let i=0;i<a.length;i++){
+//     if(junk.length===count){
+//         resutl[resutl.length]=junk;
+//         junk=[];
+//     }
+//     junk[junk.length]=a[i];
+// }
+// if(junk.length>0){
+//     resutl[resutl.length]=junk
+// }
+
+// console.log(resutl)
 
 
+// 7,Truthy value false value;
+
+// let a = [undefined,null,0,-0,'bala',-4,false,true],truthy_value=[],falsy_value=[];
+
+// for(let i=0;i<a.length;i++){
+//     if(a[i])truthy_value[truthy_value.length]=a[i];
+//     else falsy_value[falsy_value.length]=a[i];
+    
+// }
+// console.log(truthy_value,falsy_value)
